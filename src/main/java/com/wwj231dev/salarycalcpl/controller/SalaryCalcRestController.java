@@ -24,8 +24,7 @@ public class SalaryCalcRestController {
     @PostMapping("/breakdown-salary")
     public TotalSalaryBreakdown breakdownSalary(@RequestBody SalaryInputData salaryInputData){
         logger.info("SalaryCalcRestController.breakdownSalary, received param: [{}]", salaryInputData);
-        var totalSalaryBreakdown = salaryCalculatorService.breakdownSalary(salaryInputData);
-        return totalSalaryBreakdown;
+        return salaryCalculatorService.breakdownSalary(salaryInputData);
     }
 
 }
