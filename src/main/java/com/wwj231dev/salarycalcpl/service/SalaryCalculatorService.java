@@ -25,6 +25,7 @@ public class SalaryCalculatorService {
     private final TaxContributionSettings taxContributionSettings = new TaxContributionSettings();
 
     public TotalSalaryBreakdown breakdownSalary(final SalaryInputData salaryInputData) {
+        logger.info("SalaryCalculatorService.breakdownSalary, data received : [{}]", salaryInputData);
         Map<Month, BigDecimal> bruttoMonthlySalaryMap = salaryInputData.getBruttoMonthlySalaryMap();
         Map<Month, SalaryComponentsBreakdown.Builder> salaryComponentsBreakdownByMonthBuilderMap = new LinkedHashMap<>();
         Map<Month, SalaryComponentsBreakdown> salaryComponentsBreakdownByMonthMap = new LinkedHashMap<>();
@@ -121,6 +122,8 @@ public class SalaryCalculatorService {
                 .incomeTax(totalIncomeTax)
                 .nettoSalary(totalNettoSalary)
                 .build();
+
+        logger.info("SalaryCalculatorService.breakdownSalary, salary breakdown done");
 
         return new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMap, totalSalaryComponentsBreakdown);
     }
