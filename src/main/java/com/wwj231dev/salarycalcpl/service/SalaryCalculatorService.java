@@ -7,6 +7,7 @@ import com.wwj231dev.salarycalcpl.model.salarybreakdown.SocialInsuranceComponent
 import com.wwj231dev.salarycalcpl.model.salarybreakdown.TotalSalaryBreakdown;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,7 +23,10 @@ public class SalaryCalculatorService {
     private static final BigDecimal NUMBER_OF_MONTHS = BigDecimal.valueOf(12L);
     private static final Logger logger = LoggerFactory.getLogger(SalaryCalculatorService.class);
 
-    private final TaxContributionSettings taxContributionSettings = new TaxContributionSettings();
+    private TaxContributionSettings taxContributionSettings;
+
+    public SalaryCalculatorService() {
+    }
 
     public TotalSalaryBreakdown breakdownSalary(final SalaryInputData salaryInputData) {
         logger.info("SalaryCalculatorService.breakdownSalary, data received : [{}]", salaryInputData);
@@ -251,5 +255,10 @@ public class SalaryCalculatorService {
                 .subtract(incomeTax)
                 .subtract(capitalBuildingPlanEmployeeContribution)
                 .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    @Autowired
+    public void setTaxContributionSettings(final TaxContributionSettings taxContributionSettings) {
+        this.taxContributionSettings = taxContributionSettings;
     }
 }

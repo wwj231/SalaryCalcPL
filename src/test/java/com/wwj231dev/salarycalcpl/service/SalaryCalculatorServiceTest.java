@@ -1,11 +1,15 @@
 package com.wwj231dev.salarycalcpl.service;
 
 import com.wwj231dev.salarycalcpl.model.SalaryInputData;
+import com.wwj231dev.salarycalcpl.model.TaxContributionSettings;
 import com.wwj231dev.salarycalcpl.model.salarybreakdown.SalaryComponentsBreakdown;
 import com.wwj231dev.salarycalcpl.model.salarybreakdown.TotalSalaryBreakdown;
+import com.wwj231dev.salarycalcpl.utils.FileManager;
+import com.wwj231dev.salarycalcpl.utils.JsonFileManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Month;
@@ -16,9 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SalaryCalculatorServiceTest {
 
+    static final String TC_SETTINGS = "./settings/t_c_settings.json";
     Map<Month, BigDecimal> bruttoMonthlySalaryMap = new LinkedHashMap<>();
+    FileManager fileManager = new JsonFileManager();
     SalaryInputData salaryInputData;
-    SalaryCalculatorService salaryCalculatorService;
+    SalaryCalculatorService salaryCalculatorService = new SalaryCalculatorService();
     TotalSalaryBreakdown totalSalaryBreakdownToCompare;
     SalaryComponentsBreakdown salaryComponentsBreakdownToCompare;
     SalaryComponentsBreakdown salaryTotalComponentsBreakdownToCompare;
@@ -26,6 +32,12 @@ class SalaryCalculatorServiceTest {
 
     @BeforeEach
     void setUp() {
+
+        try {
+            salaryCalculatorService.setTaxContributionSettings(fileManager.importData(TaxContributionSettings.class, TC_SETTINGS));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -75,8 +87,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
 
     }
@@ -127,8 +137,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
 
     }
@@ -179,8 +187,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
 
     }
@@ -231,8 +237,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
     }
 
@@ -283,8 +287,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
 
     }
@@ -353,8 +355,6 @@ class SalaryCalculatorServiceTest {
         totalSalaryBreakdownToCompare = new TotalSalaryBreakdown(salaryComponentsBreakdownByMonthMapToCompare, salaryTotalComponentsBreakdownToCompare);
 
         //Test
-        salaryCalculatorService = new SalaryCalculatorService();
-
         assertEquals(totalSalaryBreakdownToCompare, salaryCalculatorService.breakdownSalary(salaryInputData));
 
     }

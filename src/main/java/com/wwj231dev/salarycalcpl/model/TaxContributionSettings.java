@@ -1,14 +1,11 @@
 package com.wwj231dev.salarycalcpl.model;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class TaxContributionSettings {
-
-    private static final BigDecimal NUMBER_OF_MONTHS = BigDecimal.valueOf(12L);
 
     //Employee
     private BigDecimal socialInsuranceRetirementRate;
@@ -30,30 +27,7 @@ public class TaxContributionSettings {
     private Map<Integer, BigDecimal> taxFreeThresholdsValues = new LinkedHashMap<>();
 
     public TaxContributionSettings() {
-        socialInsuranceRetirementRate = BigDecimal.valueOf(0.0976);
-        socialInsurancePensionRate = BigDecimal.valueOf(0.015);
-        socialInsuranceSickLeaveRate = BigDecimal.valueOf(0.0245);
-        socialRetirementPensionYearlyBaseLimit = BigDecimal.valueOf(157770);
-        healthcareInsuranceRate = BigDecimal.valueOf(0.09);
-        healthcareInsuranceTaxAllowanceRate = BigDecimal.valueOf(0.0775);
 
-        capitalBuildingPlanEmployeeRate = BigDecimal.valueOf(0.02);
-        capitalBuildingPlanEmployerRate = BigDecimal.valueOf(0.015);
-
-        monthlyCostsOfGettingIncome.put(true, BigDecimal.valueOf(250L));
-        monthlyCostsOfGettingIncome.put(false, BigDecimal.valueOf(300L));
-
-        taxRateThresholds.put(1, BigDecimal.valueOf(85528L));
-        taxRateThresholdsRates.put(1, BigDecimal.valueOf(0.17));
-        taxRateThresholdsRates.put(2, BigDecimal.valueOf(0.32));
-
-        taxFreeThresholds.put(1, BigDecimal.valueOf(8000L));
-        taxFreeThresholds.put(2, BigDecimal.valueOf(13000L));
-        taxFreeThresholds.put(3, BigDecimal.valueOf(85528L));
-        taxFreeThresholds.put(4, BigDecimal.valueOf(127000L));
-        taxFreeThresholdsValues.put(1, BigDecimal.valueOf(1360L).divide(NUMBER_OF_MONTHS, 2, RoundingMode.HALF_UP));
-        taxFreeThresholdsValues.put(3, BigDecimal.valueOf(525.12).divide(NUMBER_OF_MONTHS, 2, RoundingMode.HALF_UP));
-        taxFreeThresholdsValues.put(5, BigDecimal.ZERO);
     }
 
     public TaxContributionSettings(final BigDecimal socialInsuranceRetirementRate, final BigDecimal socialInsurancePensionRate, final BigDecimal socialInsuranceSickLeaveRate, final BigDecimal socialRetirementPensionYearlyBaseLimit, final BigDecimal healthcareInsuranceRate, final BigDecimal healthcareInsuranceTaxAllowanceRate, final BigDecimal capitalBuildingPlanEmployeeRate, final BigDecimal capitalBuildingPlanEmployerRate, final Map<Boolean, BigDecimal> monthlyCostsOfGettingIncome, final Map<Integer, BigDecimal> taxRateThresholds, final Map<Integer, BigDecimal> taxRateThresholdsRates, final Map<Integer, BigDecimal> taxFreeThresholds, final Map<Integer, BigDecimal> taxFreeThresholdsValues) {
@@ -206,5 +180,21 @@ public class TaxContributionSettings {
 
     public void setTaxFreeThresholds(final Map<Integer, BigDecimal> taxFreeThresholds) {
         this.taxFreeThresholds = taxFreeThresholds;
+    }
+
+    public void updateTaxContributionSettings(TaxContributionSettings newTaxContributionSettings) {
+        this.socialInsuranceRetirementRate = newTaxContributionSettings.getSocialInsuranceRetirementRate();
+        this.socialInsurancePensionRate = newTaxContributionSettings.getSocialInsurancePensionRate();
+        this.socialInsuranceSickLeaveRate = newTaxContributionSettings.getSocialInsuranceSickLeaveRate();
+        this.socialRetirementPensionYearlyBaseLimit = newTaxContributionSettings.getSocialRetirementPensionYearlyBaseLimit();
+        this.healthcareInsuranceRate = newTaxContributionSettings.getHealthcareInsuranceRate();
+        this.healthcareInsuranceTaxAllowanceRate = newTaxContributionSettings.getHealthcareInsuranceTaxAllowanceRate();
+        this.capitalBuildingPlanEmployeeRate = newTaxContributionSettings.getCapitalBuildingPlanEmployeeRate();
+        this.capitalBuildingPlanEmployerRate = newTaxContributionSettings.getCapitalBuildingPlanEmployerRate();
+        this.monthlyCostsOfGettingIncome = newTaxContributionSettings.getMonthlyCostsOfGettingIncome();
+        this.taxRateThresholds = newTaxContributionSettings.getTaxRateThresholds();
+        this.taxRateThresholdsRates = newTaxContributionSettings.getTaxRateThresholdsRates();
+        this.taxFreeThresholds = newTaxContributionSettings.getTaxFreeThresholds();
+        this.taxFreeThresholdsValues = newTaxContributionSettings.getTaxFreeThresholdsValues();
     }
 }
