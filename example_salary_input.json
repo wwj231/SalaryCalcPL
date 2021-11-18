@@ -1,0 +1,19 @@
+{
+  "bruttoMonthlySalaryMap" : {
+    "JANUARY" : 3000.00,
+    "FEBRUARY" : 3000.00,
+    "MARCH" : 3000.00,
+    "APRIL" : 3000.00,
+    "MAY" : 3000.00,
+    "JUNE" : 3000.00,
+    "JULY" : 3000.00,
+    "AUGUST" : 3000.00,
+    "SEPTEMBER" : 3000.00,
+    "OCTOBER" : 3000.00,
+    "NOVEMBER" : 3000.00,
+    "DECEMBER" : 3000.00
+  },
+  "isTaxExemptionForYoung" : false,
+  "isEmployeeCapitalBuildingPlan" : false,
+  "isWorkResidency" : false
+}
